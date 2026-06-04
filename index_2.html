@@ -52,12 +52,7 @@
       .logo-dark { display: block !important; max-height: inherit !important; overflow: visible !important; width: 116px !important; }
       .logo-light { display: none !important; }
       .footer-bg { background-color: #1a1d24 !important; }
-      /* Review plate: own tone so it lifts off the #1a1d24 cards (mirrors the warm #f6f1ee plate in light) */
-      .review-bg { background-color: #2b2622 !important; }
-      /* Hero button: lock white pill + dark text — hero stays a colour gradient in dark, so the button must NOT auto-adjust */
-      .btn-hero { background-color: #ffffff !important; color: #13151a !important; }
-      /* Secondary button: Apple Mail honours prefers-color-scheme, so do a true invert — white pill, dark text */
-      .btn-secondary { background-color: #ffffff !important; border-color: #ffffff !important; color: #13151a !important; }
+      .btn-secondary { background-color: #1c1f26 !important; border-color: #3f444f !important; }
     }
     /* Outlook.com / Gmail dark-mode targeting */
     [data-ogsc] .body-bg { background-color: #0f1115 !important; }
@@ -67,9 +62,6 @@
     [data-ogsc] .divider { border-color: #2a2e38 !important; }
     [data-ogsc] .logo-light { display: none !important; }
     [data-ogsc] .logo-dark { display: block !important; max-height: inherit !important; overflow: visible !important; width: 116px !important; }
-    [data-ogsc] .review-bg { background-color: #2b2622 !important; }
-    [data-ogsc] .btn-hero { background-color: #ffffff !important; color: #13151a !important; }
-    /* Gmail can't reliably do a white-pill invert here, so keep the raised-dark pill with a border */
     [data-ogsc] .btn-secondary { background-color: #1c1f26 !important; border-color: #3f444f !important; }
   </style>
 </head>
@@ -140,7 +132,7 @@
                         </v:roundrect>
                         <![endif]-->
                         <!--[if !mso]><!-->
-                        <a href="https://example.com/sale" target="_blank" class="btn-hero" style="background-color:#ffffff; border-radius:26px; color:#13151a; display:inline-block; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:52px; text-align:center; text-decoration:none; width:220px; -webkit-text-size-adjust:none;">Shop the sale</a>
+                        <a href="https://example.com/sale" target="_blank" style="background-color:#ffffff; border-radius:26px; color:#13151a; display:inline-block; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:52px; text-align:center; text-decoration:none; width:220px; -webkit-text-size-adjust:none;">Shop the sale</a>
                         <!--<![endif]-->
                       </td>
                     </tr>
@@ -197,7 +189,7 @@
 
       <!-- ===== REVIEW / SOCIAL PROOF ===== -->
       <tr>
-        <td class="review-bg" style="background-color:#f6f1ee; padding:44px 48px;" align="center">
+        <td class="card-bg" style="background-color:#f6f1ee; padding:44px 48px;" align="center">
           <!-- Stars: Unicode U+2605 (broad client support). For pixel-perfect parity across all clients
                a single star-rating PNG is the hardened alternative; kept as text here for crispness + accessibility. -->
           <p style="margin:0 0 14px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:18px; line-height:18px; color:#d9a441; letter-spacing:4px;">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
