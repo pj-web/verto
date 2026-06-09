@@ -44,8 +44,6 @@
 
     /* ---------- DARK MODE ---------- */
     @media (prefers-color-scheme: dark) {
-      /* DIAGNOSTIC (temporary): if this turns magenta in dark mode, the <style>+prefers block IS being applied. */
-      .build-marker { background-color: #ff00ff !important; }
       .body-bg { background-color: #0f1115 !important; }
       .card-bg { background-color: #1a1d24 !important; }
       .text-primary { color: #f4f5f7 !important; }
@@ -56,11 +54,10 @@
       .footer-bg { background-color: #1a1d24 !important; }
       /* Review plate: own tone so it lifts off the #1a1d24 cards (mirrors the warm #f6f1ee plate in light) */
       .review-bg { background-color: #2b2622 !important; }
-      /* Hero button: lock off-white pill (#fffffe dodges Apple Mail's pure-#ffffff dark clamp) + dark text */
-      .btn-hero { background-color: #fffffe !important; color: #13151a !important; }
-      /* Secondary button: Apple flips bg on the TD reliably — invert to off-white pill, dark text */
-      .btn-sec-bg { background-color: #fffffe !important; }
-      .btn-sec-txt { color: #13151a !important; }
+      /* Hero button: lock white pill + dark text — hero stays a colour gradient in dark, so the button must NOT auto-adjust */
+      .btn-hero { background-color: #ffffff !important; color: #13151a !important; }
+      /* Secondary button: Apple Mail honours prefers-color-scheme, so do a true invert — white pill, dark text */
+      .btn-secondary { background-color: #ffffff !important; border-color: #ffffff !important; color: #13151a !important; }
     }
     /* Outlook.com / Gmail dark-mode targeting */
     [data-ogsc] .body-bg { background-color: #0f1115 !important; }
@@ -71,9 +68,9 @@
     [data-ogsc] .logo-light { display: none !important; }
     [data-ogsc] .logo-dark { display: block !important; max-height: inherit !important; overflow: visible !important; width: 116px !important; }
     [data-ogsc] .review-bg { background-color: #2b2622 !important; }
-    [data-ogsc] .btn-hero { background-color: #fffffe !important; color: #13151a !important; }
-    /* Gmail can't reliably do a white-pill invert here, so keep the raised-dark pill with a border (text stays white) */
-    [data-ogsc] .btn-sec-bg { background-color: #1c1f26 !important; border: 1px solid #3f444f !important; }
+    [data-ogsc] .btn-hero { background-color: #ffffff !important; color: #13151a !important; }
+    /* Gmail can't reliably do a white-pill invert here, so keep the raised-dark pill with a border */
+    [data-ogsc] .btn-secondary { background-color: #1c1f26 !important; border-color: #3f444f !important; }
   </style>
 </head>
 <body id="body" class="body-bg" style="margin:0; padding:0; background-color:#eceef2;">
@@ -90,13 +87,6 @@
     <![endif]-->
 
     <table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" width="600" class="email-container" style="margin:0 auto; max-width:600px;">
-
-      <!-- ===== BUILD MARKER (temporary — delete this whole <tr> after the dark-mode test) ===== -->
-      <tr>
-        <td class="build-marker" bgcolor="#00e000" align="center" style="background-color:#00e000; padding:14px 20px; font-family:Arial,sans-serif; font-size:15px; font-weight:700; color:#000000; letter-spacing:1px;">
-          ▶ light = green · dark = magenta
-        </td>
-      </tr>
 
       <!-- ===== HEADER / LOGO ===== -->
       <tr>
@@ -153,8 +143,8 @@
                   <p style="margin:0 0 32px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:18px; line-height:26px; color:#ffffff; opacity:0.95;">Up to <strong>40% off</strong> the pieces you keep reaching for.</p>
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto;">
                     <tr>
-                      <td align="center" bgcolor="#fffffe" class="btn-hero" style="border-radius:26px; background-color:#fffffe; mso-padding-alt:15px 44px;">
-                        <a href="https://example.com/sale" target="_blank" class="btn-hero" style="display:inline-block; padding:15px 44px; border-radius:26px; color:#13151a; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:20px; text-decoration:none; -webkit-text-size-adjust:none;">Shop the sale</a>
+                      <td align="center" bgcolor="#ffffff" class="btn-hero" style="border-radius:26px; background-color:#ffffff; mso-padding-alt:15px 44px;">
+                        <a href="https://example.com/sale" target="_blank" class="btn-hero" style="display:inline-block; padding:15px 44px; color:#13151a; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:20px; text-decoration:none; -webkit-text-size-adjust:none;">Shop the sale</a>
                       </td>
                     </tr>
                   </table>
@@ -231,8 +221,16 @@
         <td class="card-bg" style="background-color:#ffffff; padding:16px 48px 56px 48px;" align="center">
           <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto;">
             <tr>
-              <td align="center" bgcolor="#13151a" class="btn-sec-bg" style="border-radius:26px; background-color:#13151a; mso-padding-alt:16px 50px;">
-                <a href="https://example.com/sale" target="_blank" class="btn-sec-txt" style="display:inline-block; padding:16px 50px; border-radius:26px; color:#ffffff; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:20px; text-decoration:none; -webkit-text-size-adjust:none;">Browse everything</a>
+              <td>
+                <!--[if mso]>
+                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://example.com/sale" style="height:52px;v-text-anchor:middle;width:240px;" arcsize="50%" stroke="false" fillcolor="#13151a">
+                <w:anchorlock/>
+                <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Browse everything</center>
+                </v:roundrect>
+                <![endif]-->
+                <!--[if !mso]><!-->
+                <a href="https://example.com/sale" target="_blank" class="btn-secondary" style="background-color:#13151a; border:1px solid #13151a; border-radius:26px; color:#ffffff; display:inline-block; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:52px; text-align:center; text-decoration:none; width:240px; -webkit-text-size-adjust:none;">Browse everything</a>
+                <!--<![endif]-->
               </td>
             </tr>
           </table>

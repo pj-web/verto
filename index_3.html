@@ -44,8 +44,6 @@
 
     /* ---------- DARK MODE ---------- */
     @media (prefers-color-scheme: dark) {
-      /* DIAGNOSTIC (temporary): if this turns magenta in dark mode, the <style>+prefers block IS being applied. */
-      .build-marker { background-color: #ff00ff !important; }
       .body-bg { background-color: #0f1115 !important; }
       .card-bg { background-color: #1a1d24 !important; }
       .text-primary { color: #f4f5f7 !important; }
@@ -56,11 +54,10 @@
       .footer-bg { background-color: #1a1d24 !important; }
       /* Review plate: own tone so it lifts off the #1a1d24 cards (mirrors the warm #f6f1ee plate in light) */
       .review-bg { background-color: #2b2622 !important; }
-      /* Hero button: lock off-white pill (#fffffe dodges Apple Mail's pure-#ffffff dark clamp) + dark text */
-      .btn-hero { background-color: #fffffe !important; color: #13151a !important; }
-      /* Secondary button: Apple flips bg on the TD reliably — invert to off-white pill, dark text */
-      .btn-sec-bg { background-color: #fffffe !important; }
-      .btn-sec-txt { color: #13151a !important; }
+      /* Hero button: lock white pill + dark text — hero stays a colour gradient in dark, so the button must NOT auto-adjust */
+      .btn-hero { background-color: #ffffff !important; color: #13151a !important; }
+      /* Secondary button: Apple Mail honours prefers-color-scheme, so do a true invert — white pill, dark text */
+      .btn-secondary { background-color: #ffffff !important; border-color: #ffffff !important; color: #13151a !important; }
     }
     /* Outlook.com / Gmail dark-mode targeting */
     [data-ogsc] .body-bg { background-color: #0f1115 !important; }
@@ -71,9 +68,9 @@
     [data-ogsc] .logo-light { display: none !important; }
     [data-ogsc] .logo-dark { display: block !important; max-height: inherit !important; overflow: visible !important; width: 116px !important; }
     [data-ogsc] .review-bg { background-color: #2b2622 !important; }
-    [data-ogsc] .btn-hero { background-color: #fffffe !important; color: #13151a !important; }
-    /* Gmail can't reliably do a white-pill invert here, so keep the raised-dark pill with a border (text stays white) */
-    [data-ogsc] .btn-sec-bg { background-color: #1c1f26 !important; border: 1px solid #3f444f !important; }
+    [data-ogsc] .btn-hero { background-color: #ffffff !important; color: #13151a !important; }
+    /* Gmail can't reliably do a white-pill invert here, so keep the raised-dark pill with a border */
+    [data-ogsc] .btn-secondary { background-color: #1c1f26 !important; border-color: #3f444f !important; }
   </style>
 </head>
 <body id="body" class="body-bg" style="margin:0; padding:0; background-color:#eceef2;">
@@ -90,13 +87,6 @@
     <![endif]-->
 
     <table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" width="600" class="email-container" style="margin:0 auto; max-width:600px;">
-
-      <!-- ===== BUILD MARKER (temporary — delete this whole <tr> after the dark-mode test) ===== -->
-      <tr>
-        <td class="build-marker" bgcolor="#00e000" align="center" style="background-color:#00e000; padding:14px 20px; font-family:Arial,sans-serif; font-size:15px; font-weight:700; color:#000000; letter-spacing:1px;">
-          ▶ light = green · dark = magenta
-        </td>
-      </tr>
 
       <!-- ===== HEADER / LOGO ===== -->
       <tr>
@@ -129,47 +119,36 @@
         <td>
           <!--[if mso]>
           <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:360px;">
-          <v:fill type="frame" src="https://pj-web.github.io/verto/assets/hero-gradient.jpg" color="#3a1c71" />
+          <v:fill type="gradient" color="#3a1c71" color2="#d76d77" angle="135" />
           <v:textbox inset="0,0,0,0"><![endif]-->
-          <!--[if !mso]><!-->
           <div style="background-color:#3a1c71; background-image:linear-gradient(135deg,#3a1c71 0%,#d76d77 55%,#ffaf7b 100%);">
-          <!--<![endif]-->
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
               <tr>
-                <td class="hero-pad" style="padding:64px 48px; text-align:center; background-image:url('https://pj-web.github.io/verto/assets/hero-gradient.jpg'); background-position:center center; background-size:cover; background-repeat:no-repeat;" align="center">
-
-                  <!-- Bulletproof button (padding-based). Vertical centring: equal top/bottom mso-padding-alt.
-                       Horizontal centring: modern clients via the button table's align=center; Outlook via an
-                       mso-only fixed-width wrapper (504 = 600 hero − 2×48px side padding) with align=center,
-                       because width:100% collapses inside a VML textbox and table align alone won't centre in Word. -->
-                  <!--[if mso]>
-                  <table role="presentation" align="center" width="600" cellspacing="0" cellpadding="0" border="0">
-                    <tr>
-                      <td align="center" width="48"></td>
-                      <td align="center" width="504">
-                  <![endif]-->
+                <td class="hero-pad" style="padding:64px 48px; text-align:center; background-color:#3a1c71; background-image:url('https://pj-web.github.io/verto/assets/hero-gradient.jpg'); background-position:center center; background-size:cover; background-repeat:no-repeat;" align="center">
                   <p style="margin:0 0 14px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px; font-weight:600; letter-spacing:3px; color:#ffffff; text-transform:uppercase; opacity:0.85;">Two days only</p>
                   <h1 class="h1" style="margin:0 0 18px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:46px; line-height:50px; font-weight:800; color:#ffffff; letter-spacing:-1px;">Mid-Season Sale</h1>
                   <p style="margin:0 0 32px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:18px; line-height:26px; color:#ffffff; opacity:0.95;">Up to <strong>40% off</strong> the pieces you keep reaching for.</p>
+
+                  <!-- Bulletproof button: bg on TD, VML for Outlook -->
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto;">
                     <tr>
-                      <td align="center" bgcolor="#fffffe" class="btn-hero" style="border-radius:26px; background-color:#fffffe; mso-padding-alt:15px 44px;">
-                        <a href="https://example.com/sale" target="_blank" class="btn-hero" style="display:inline-block; padding:15px 44px; border-radius:26px; color:#13151a; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:20px; text-decoration:none; -webkit-text-size-adjust:none;">Shop the sale</a>
+                      <td>
+                        <!--[if mso]>
+                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://example.com/sale" style="height:52px;v-text-anchor:middle;width:220px;" arcsize="50%" stroke="false" fillcolor="#ffffff">
+                        <w:anchorlock/>
+                        <center style="color:#13151a;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Shop the sale</center>
+                        </v:roundrect>
+                        <![endif]-->
+                        <!--[if !mso]><!-->
+                        <a href="https://example.com/sale" target="_blank" class="btn-hero" style="background-color:#ffffff; border-radius:26px; color:#13151a; display:inline-block; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:52px; text-align:center; text-decoration:none; width:220px; -webkit-text-size-adjust:none;">Shop the sale</a>
+                        <!--<![endif]-->
                       </td>
                     </tr>
                   </table>
-                  <!--[if mso]>
-                  </td>
-                  <td align="center" width="48"></td>
-                </tr>
-              </table>
-                  <![endif]-->
                 </td>
               </tr>
             </table>
-          <!--[if !mso]><!-->
           </div>
-          <!--<![endif]-->
           <!--[if mso]></v:textbox></v:rect><![endif]-->
         </td>
       </tr>
@@ -188,7 +167,8 @@
         <td class="card-bg section-pad" style="background-color:#ffffff; padding:24px 36px 16px 36px;">
           <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
             <tr>
-              <td class="stack-column" width="264" valign="top" style="width:264px; vertical-align:top;">
+              <!--[if mso]><td width="50%" valign="top"><![endif]-->
+              <td class="stack-column" style="width:50%; vertical-align:top;">
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
                   <tr><td class="product-card" style="padding:12px;">
                     <img src="https://pj-web.github.io/verto/assets/verto-item-01.png" alt="The Everyday Tote" width="240" style="width: 240px; height: auto; border-radius:10px;">
@@ -198,7 +178,8 @@
                   </td></tr>
                 </table>
               </td>
-              <td class="stack-column" width="264" valign="top" style="width:264px; vertical-align:top;">
+              <!--[if mso]></td><td width="50%" valign="top"><![endif]-->
+              <td class="stack-column" style="width:50%; vertical-align:top;">
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
                   <tr><td class="product-card" style="padding:12px;">
                     <img src="https://pj-web.github.io/verto/assets/verto-item-02.png" alt="Merino Crew Knit" width="240" style="width: 240px; height: auto; border-radius:10px;">
@@ -208,6 +189,7 @@
                   </td></tr>
                 </table>
               </td>
+              <!--[if mso]></td><![endif]-->
             </tr>
           </table>
         </td>
@@ -231,8 +213,16 @@
         <td class="card-bg" style="background-color:#ffffff; padding:16px 48px 56px 48px;" align="center">
           <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto;">
             <tr>
-              <td align="center" bgcolor="#13151a" class="btn-sec-bg" style="border-radius:26px; background-color:#13151a; mso-padding-alt:16px 50px;">
-                <a href="https://example.com/sale" target="_blank" class="btn-sec-txt" style="display:inline-block; padding:16px 50px; border-radius:26px; color:#ffffff; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:20px; text-decoration:none; -webkit-text-size-adjust:none;">Browse everything</a>
+              <td>
+                <!--[if mso]>
+                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://example.com/sale" style="height:52px;v-text-anchor:middle;width:240px;" arcsize="50%" stroke="false" fillcolor="#13151a">
+                <w:anchorlock/>
+                <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Browse everything</center>
+                </v:roundrect>
+                <![endif]-->
+                <!--[if !mso]><!-->
+                <a href="https://example.com/sale" target="_blank" class="btn-secondary" style="background-color:#13151a; border:1px solid #13151a; border-radius:26px; color:#ffffff; display:inline-block; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:52px; text-align:center; text-decoration:none; width:240px; -webkit-text-size-adjust:none;">Browse everything</a>
+                <!--<![endif]-->
               </td>
             </tr>
           </table>
@@ -251,21 +241,25 @@
         <td class="card-bg" style="background-color:#ffffff; padding:24px 28px 44px 28px;">
           <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
             <tr>
-              <td class="stack-column-center" width="181" valign="top" style="width:181px; vertical-align:top; text-align:center; padding:12px 6px;">
+              <!--[if mso]><td width="33%" valign="top"><![endif]-->
+              <td class="stack-column-center" style="width:33.33%; vertical-align:top; text-align:center; padding:12px 6px;">
                 <img src="https://pj-web.github.io/verto/assets/icon-shipping.png" alt="" width="30" height="30" style="display:block; margin:0 auto 10px auto; width:30px; height:30px; border:0;">
                 <p class="text-primary" style="margin:0 0 3px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; font-weight:600; color:#13151a;">Free shipping</p>
                 <p class="text-secondary" style="margin:0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px; line-height:18px; color:#9aa0ab;">On orders over $75</p>
               </td>
-              <td class="stack-column-center" width="181" valign="top" style="width:181px; vertical-align:top; text-align:center; padding:12px 6px;">
+              <!--[if mso]></td><td width="33%" valign="top"><![endif]-->
+              <td class="stack-column-center" style="width:33.33%; vertical-align:top; text-align:center; padding:12px 6px;">
                 <img src="https://pj-web.github.io/verto/assets/icon-returns.png" alt="" width="30" height="30" style="display:block; margin:0 auto 10px auto; width:30px; height:30px; border:0;">
                 <p class="text-primary" style="margin:0 0 3px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; font-weight:600; color:#13151a;">30-day returns</p>
                 <p class="text-secondary" style="margin:0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px; line-height:18px; color:#9aa0ab;">No questions asked</p>
               </td>
-              <td class="stack-column-center" width="181" valign="top" style="width:181px; vertical-align:top; text-align:center; padding:12px 6px;">
+              <!--[if mso]></td><td width="33%" valign="top"><![endif]-->
+              <td class="stack-column-center" style="width:33.33%; vertical-align:top; text-align:center; padding:12px 6px;">
                 <img src="https://pj-web.github.io/verto/assets/icon-quality.png" alt="" width="30" height="30" style="display:block; margin:0 auto 10px auto; width:30px; height:30px; border:0;">
                 <p class="text-primary" style="margin:0 0 3px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; font-weight:600; color:#13151a;">Made to last</p>
                 <p class="text-secondary" style="margin:0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px; line-height:18px; color:#9aa0ab;">2-year guarantee</p>
               </td>
+              <!--[if mso]></td><![endif]-->
             </tr>
           </table>
         </td>
