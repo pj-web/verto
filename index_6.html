@@ -40,7 +40,7 @@
       .h1 { font-size: 34px !important; line-height: 40px !important; }
       .product-card { padding: 0 0 24px 0 !important; text-align: center; }
       .product-card img { width: 100% !important; }
-      .logo-light, .logo-dark { width: 120px !important; }
+      .logo-light { width: 120px !important; }
       .card-bg { padding:28px 20px !important; }
     }
 
@@ -51,7 +51,7 @@
       .text-primary { color: #f4f5f7 !important; }
       .text-secondary { color: #b4b8c2 !important; }
       .divider { border-color: #2a2e38 !important; }
-      .logo-dark { display: block !important; max-height: inherit !important; overflow: visible !important; }
+      .logo-dark { display: block !important; max-height: inherit !important; overflow: visible !important; width: 116px !important; }
       .logo-light { display: none !important; }
       .footer-bg { background-color: #1a1d24 !important; }
       /* Review plate: own tone so it lifts off the #1a1d24 cards (mirrors the warm #f6f1ee plate in light) */
@@ -64,28 +64,18 @@
       .btn-sec-txt { color: #13151a !important; }
     }
     /* Outlook.com / Gmail dark-mode targeting */
-    [data-ogsb] .body-bg { background-color: #0f1115 !important; }
-    [data-ogsb] .card-bg { background-color: #1a1d24 !important; }
+    [data-ogsc] .body-bg { background-color: #0f1115 !important; }
+    [data-ogsc] .card-bg { background-color: #1a1d24 !important; }
     [data-ogsc] .text-primary { color: #f4f5f7 !important; }
     [data-ogsc] .text-secondary { color: #b4b8c2 !important; }
     [data-ogsc] .divider { border-color: #2a2e38 !important; }
     [data-ogsc] .logo-light { display: none !important; }
-    [data-ogsc] .logo-dark { display: block !important; max-height: inherit !important; overflow: visible !important; }
+    [data-ogsc] .logo-dark { display: block !important; max-height: inherit !important; overflow: visible !important; width: 116px !important; }
     [data-ogsc] .review-bg { background-color: #2b2622 !important; }
     [data-ogsc] .btn-hero { background-color: #fffffe !important; color: #13151a !important; }
     /* Outlook app honors data-ogsc: keep a raised-dark pill with a border (text stays white).
        NOTE: this is for the Outlook *app* — Outlook *web* forces its own inversion and ignores these. */
     [data-ogsc] .btn-sec-bg { background-color: #1c1f26 !important; border: 1px solid #3f444f !important; }
-  </style>
-  
-  <style>
-    /* Yahoo */
-    .& .btn-hero { 
-    background-color: #ffffff !important; 
-    background-image: linear-gradient(#ffffff, #f8f8f7) !important; 
-    color: #13151b !important; 
-    -webkit-text-fill-color: #13151b !important;
-  }
   </style>
 </head>
 <body id="body" class="body-bg" style="margin:0; padding:0; background-color:#eeeeee;">
@@ -114,7 +104,7 @@
                 <a href="https://example.com" target="_blank" style="text-decoration:none; display:inline-block;">
                   <!--[if !mso]><!-->
                   <img src="https://pj-web.github.io/verto/assets/verto-logo-clip-small.png" alt="VERTO" width="150" class="logo-light" style="display:block; width:150px; max-width:150px; height:auto; border:0; outline:none; text-decoration:none; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:24px; font-weight:700; letter-spacing:6px; color:#13151a;">
-                  <img src="https://pj-web.github.io/verto/assets/verto-logo-light.png" alt="VERTO" width="150" class="logo-dark" style="display:none; width:150px; max-width:116px; height:auto; border:0; outline:none; text-decoration:none;">
+                  <img src="https://pj-web.github.io/verto/assets/verto-logo-light.png" alt="VERTO" width="116" class="logo-dark" style="display:none; width:116px; max-width:116px; height:auto; border:0; outline:none; text-decoration:none;">
                   <!--<![endif]-->
                   <!--[if mso]>
                   <img src="https://pj-web.github.io/verto/assets/verto-logo-chip.png" alt="VERTO" width="150" style="width:150px; height:auto; border:0;" />
@@ -158,8 +148,8 @@
                   <p style="margin:0 0 32px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:18px; line-height:26px; color:#ffffff; opacity:0.95;">Up to <strong>40% off</strong> the pieces you keep reaching for.</p>
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto;">
                     <tr>
-                      <td align="center" bgcolor="#fffffe" class="btn-hero" style="border-radius:26px; background-color:#fffffe; background-image: linear-gradient(#fffffe, #fffffe) !important; mso-padding-alt:15px 44px;">
-                        <a href="https://example.com/sale" target="_blank" class="btn-hero" style="display:inline-block; padding:15px 44px; border-radius:26px; color:#13151a; -webkit-text-fill-color: #13151a !important; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:20px; text-decoration:none; -webkit-text-size-adjust:none;">Shop the sale</a>
+                      <td align="center" bgcolor="#fffffe" class="btn-hero" style="border-radius:26px; background-color:#fffffe; mso-padding-alt:15px 44px;">
+                        <a href="https://example.com/sale" target="_blank" class="btn-hero" style="display:inline-block; padding:15px 44px; border-radius:26px; color:#13151a; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; font-weight:700; line-height:20px; text-decoration:none; -webkit-text-size-adjust:none;">Shop the sale</a>
                       </td>
                     </tr>
                   </table>
